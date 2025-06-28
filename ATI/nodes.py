@@ -156,6 +156,7 @@ class WanVideoATITracks:
     CATEGORY = "WanVideoWrapper"
 
     def patchmodel(self, model, tracks, width, height, temperature, topk, start_percent, end_percent):
+        print(f"Processing tracks: {tracks}")
         tracks_data = parse_json_tracks(tracks)
         arrs = []
         for track in tracks_data:
@@ -165,6 +166,7 @@ class WanVideoATITracks:
         tracks_np = np.stack(arrs, axis=0)
 
         processed_tracks = process_tracks(tracks_np, (width, height))
+        print(f"Processed tracks: {processed_tracks}")
 
         patcher = model.clone()
         patcher.model_options["transformer_options"]["ati_tracks"] = processed_tracks.unsqueeze(0)
