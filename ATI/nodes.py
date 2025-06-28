@@ -276,7 +276,7 @@ def modified_concat_cond(self, tracks, temperature, topk, **kwargs):
     image_cond = torch.cat((mask, image), dim=1)
     image_cond_ati = patch_motion(tracks.to(image_cond.device, image_cond.dtype), image_cond[0], 
                                   temperature=temperature, topk=topk)
-
+    print ("image_cond_ati shape:", image_cond_ati.shape)
     return image_cond_ati.unsqueeze(0)
 
 class WanVideoATI_comfy:
