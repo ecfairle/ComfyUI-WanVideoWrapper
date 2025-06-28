@@ -2739,7 +2739,7 @@ class WanVideoSampler:
                     ati_start_percent = transformer_options.get("ati_start_percent", 0.0)
                     ati_end_percent = transformer_options.get("ati_end_percent", 1.0)
                     image_cond_ati = patch_motion(ATI_tracks.to(image_cond.device, image_cond.dtype), image_cond, topk=topk, temperature=temperature)
-                    log.info(f"ATI tracks shape: {ATI_tracks.shape}")
+                    log.info(f"ATI tracks shape: {ATI_tracks.shape} {image_cond_ati.shape}")
             
             realisdance_latents = image_embeds.get("realisdance_latents", None)
             if realisdance_latents is not None:

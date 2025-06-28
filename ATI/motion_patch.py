@@ -93,6 +93,8 @@ def patch_motion(
         _, tracks, visible = torch.split(
             tracks, [1, 2, 1], dim=-1
         )  # (B, T, N, 2) | (B, T, N, 1)
+
+        print("vid shape:", vid)
         tracks_n = tracks / torch.tensor([W / min(H, W), H / min(H, W)], device=tracks.device)
         tracks_n = tracks_n.clamp(-1, 1)
         visible = visible.clamp(0, 1)
@@ -120,6 +122,7 @@ def patch_motion(
         vert_weight, vert_index = torch.topk(
             weight, k=min(topk, weight.shape[-1]), dim=-1
         )
+        print("vert_weight:", vert_weight)
 
     grid_mode = "bilinear"
     point_feature = torch.nn.functional.grid_sample(
