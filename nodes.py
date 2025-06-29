@@ -1601,6 +1601,7 @@ class WanVideoImageClipEncode:
         # Step 3: Concatenate image with zero frames
         concatenated = torch.concat([resized_image.to(device), zero_frames, resized_image.to(device)], dim=1).to(device = device, dtype = vae.dtype)
         concatenated *= latent_strength
+        print(f"Encoding image with shape: {concatenated.shape}, dtype: {concatenated.dtype}, data: {concatenated}")
         y = vae.encode([concatenated], device)[0]
 
         y = torch.concat([mask, y])
