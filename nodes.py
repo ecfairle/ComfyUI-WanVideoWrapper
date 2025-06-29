@@ -1912,7 +1912,8 @@ class WanVideoImageToVideoEncode:
         else:
             temporal_mask = common_upscale(temporal_mask.unsqueeze(1), W, H, "nearest", "disabled").squeeze(1)
             concatenated = resized_start_image[:,:num_frames] * temporal_mask[:num_frames].unsqueeze(0)
-
+        
+        print(f"Concatenated image shape: {concatenated.shape}, dtype: {concatenated.dtype}, data: {concatenated}")
         y = vae.encode([concatenated.to(device=device, dtype=vae.dtype)], device, end_=(end_image is not None and not fun_or_fl2v_model),tiled=tiled_vae)[0]
         has_ref = False
         if extra_latents is not None:
