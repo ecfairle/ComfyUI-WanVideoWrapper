@@ -122,7 +122,7 @@ def patch_motion(
         vert_weight, vert_index = torch.topk(
             weight, k=min(topk, weight.shape[-1]), dim=-1
         )
-        print("vert_weight:", vert_weight)
+        print("vert_weight:", vert_index)
 
     grid_mode = "bilinear"
     point_feature = torch.nn.functional.grid_sample(
